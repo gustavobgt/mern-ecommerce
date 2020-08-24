@@ -1,7 +1,6 @@
 const express = require('express');
 const env = require('dotenv');
 const app = express();
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // routes
@@ -28,21 +27,7 @@ mongoose
   });
 
 // Passing the data in json format
-/**
- * body-parser deprecated bodyParser: use individual json/urlencoded middlewares src\index.server.js:10:9
- * body-parser deprecated undefined extended: provide extended option node_modules\body-parser\index.js:105:29
- */
-// A chamada via construtor está depreciada, chamar os middlewares individualmente
-
-app.use(bodyParser.json());
-
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
-
-bodyParser.urlencoded({ extended: true });
+app.use(express.json());
 
 app.use('/api', authRoutes);
 app.use('/api', adminRoutes);
